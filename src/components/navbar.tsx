@@ -22,7 +22,13 @@ export default function Navbar() {
             About Me
           </Link>
         </li>
+        <li>
+          <Link href="/ai" className="hover:text-blue-400 transition-colors">
+            AI
+          </Link>
+        </li>
       </ul>
     </nav>
   );
 }
+

@@ -7,7 +7,7 @@ export default function Home() {
     <main className="flex flex-col items-center justify-center gap-6 p-6 min-h-screen bg-background text-foreground">
       {/* Title */}
       <h1 className="text-4xl font-bold text-center">
-        Welcome to Trevor's Pi Website
+      Welcome to Trevor's Pi Website
       </h1>
 
       {/* Description */}
