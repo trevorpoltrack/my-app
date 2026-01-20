@@ -1,70 +1,114 @@
 @import "tailwindcss";
 
-/* Define base colors and fonts for the light theme */
+/* Define base colors and fonts for the LIGHT theme */
 :root {
-  --background: #0f1e40; /* Navy Blue background */
-  --foreground: #e0e7ff; /* Light periwinkle text color */
-  --primary: #3b82f6;    /* Tailwind blue-500 used for links/buttons */
-  --secondary: #6366f1;  /* Tailwind indigo-500 used for hover accents */
-  
+  --background: #e3f2ff; /* Navy Blue background */
+  --foreground: #5C7E8F; /* Light periwinkle text color */
+  --primary: #82a1b1;    /* Tailwind blue-500 used for links/buttons */
+  --secondary: #ee6c4d;  /* Tailwind indigo-500 used for hover accents */
+
+  /* Linked Navbar + Box variables (edit these to customize colors) */
+  --navbar-bg: #D4DDE2;     /* gray-900 */
+  --navbar-fg: #5C7E8F;
+  --navbar-hover: #ee6c4d;
+
+  --box-bg: #D4DDE2;        /* gray-900 */
+  --box-fg: #5C7E8F;
+  --box-border: #A2A2A2;
+
   /* Custom fonts with fallbacks */
-  --font-sans: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: 'Geist Sans', -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
   --font-mono: 'Geist Mono', monospace;
 }
 
-/* Dark mode overrides */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0b122a; /* Darker navy for dark mode */
-    --foreground: #cbd5e1; /* Softer light gray text */
-    --primary: #60a5fa;    /* Lighter blue accent for links/buttons */
-    --secondary: #818cf8;  /* Indigo accent on hover */
-  }
+/* Dark mode overrides (controlled by next-themes via html.dark) */
+html.dark {
+  --background: #3d5a80; /* Darker navy for dark mode */
+  --foreground: #98c1d9; /* Softer light gray text */
+  --primary: #e0fbfc;
+  --secondary: #ee6c4d;
+
+  --navbar-bg: #293241;
+  --navbar-fg: #98c1d9;
+  --navbar-hover: #ee6c4d;
+
+  --box-bg: #293241;
+  --box-fg: #98c1d9;
+  --box-border: #98c1d9;
 }
 
 /* Body styles */
 body {
-  background-color: var(--background);  /* Use navy blue background */
-  color: var(--foreground);             /* Use light foreground text */
-  font-family: var(--font-sans);        /* Use custom sans-serif font */
-  line-height: 1.6;                     /* Comfortable line height */
-  margin: 0;                           /* Reset default margin */
-  padding: 0;                          /* Reset default padding */
-  
-  /* Smooth transition when colors change (e.g. dark mode toggle) */
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Link styles */
 a {
-  color: var(--primary);                /* Primary blue for links */
-  text-decoration: none;                /* Remove underline by default */
-  font-weight: 600;                    /* Semi-bold */
-  transition: color 0.2s ease;          /* Smooth color transition */
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
 }
 a:hover {
-  color: var(--secondary);              /* Change to secondary color on hover */
-  text-decoration: underline;           /* Underline on hover */
+  color: var(--secondary);
+  text-decoration: underline;
 }
 
 /* Headings style */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;                     /* Bold headings */
-  color: var(--foreground);             /* Foreground color */
-  margin-top: 0;                       /* Remove top margin */
+  font-weight: 700;
+  color: var(--foreground);
+  margin-top: 0;
 }
 
-/* Button styles */
+/* Button styles (unchanged from your file) */
 button {
-  background-color: var(--primary);    /* Primary blue background */
-  color: var(--foreground);             /* Foreground text color */
-  border: none;                       /* No border */
-  padding: 0.5rem 1rem;                /* Padding for comfortable size */
-  border-radius: 0.375rem;             /* Rounded corners */
-  font-weight: 600;                    /* Semi-bold text */
-  cursor: pointer;                    /* Pointer cursor on hover */
-  transition: background-color 0.2s ease; /* Smooth background color change */
+  background-color: var(--primary);
+  color: var(--foreground);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 button:hover {
-  background-color: var(--secondary);  /* Secondary color on hover */
+  background-color: var(--secondary);
+}
+
+/* Shared box/card style used by Stats + About Me + AI */
+.box {
+  background-color: var(--box-bg);
+  color: var(--box-fg);
+  border: 1px solid var(--box-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+}
+
+button.theme-toggle {
+  background-color: transparent !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+button.theme-toggle:hover {
+  background-color: transparent !important;
+}
+
+button.theme-toggle:focus {
+  background-color: transparent !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+button.theme-toggle:active {
+  background-color: transparent !important;
 }
