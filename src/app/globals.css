@@ -112,3 +112,57 @@ button.theme-toggle:focus {
 button.theme-toggle:active {
   background-color: transparent !important;
 }
+
+/* --- Sliding photo loops (marquee) --- */
+.marquee {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: marquee-left 22s linear infinite;
+}
+
+.marquee-track.reverse {
+  animation: marquee-right 22s linear infinite;
+}
+
+.marquee-item {
+  flex: 0 0 auto;
+  margin-right: 14px;
+}
+
+@keyframes marquee-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-40%); }
+}
+
+@keyframes marquee-right {
+  0% { transform: translateX(-40%); }
+  100% { transform: translateX(0); }
+}
+
+/* optional: nice fade edges */
+.marquee::before,
+.marquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 60px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee::before {
+  left: 0;
+  background: linear-gradient(to right, var(--background), transparent);
+}
+
+.marquee::after {
+  right: 0;
+  background: linear-gradient(to left, var(--background), transparent);
+}
