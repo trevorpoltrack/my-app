@@ -145,7 +145,7 @@ button.theme-toggle:active {
   100% { transform: translateX(0); }
 }
 
-/* optional: nice fade edges */
+/* nice fade edges */
 .marquee::before,
 .marquee::after {
   content: "";
