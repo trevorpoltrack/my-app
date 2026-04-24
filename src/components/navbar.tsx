@@ -26,7 +26,7 @@ export default function Navbar() {
 
   return (
     <nav
-      className="w-full px-4 sm:px-6 h-14 flex items-center shadow-md"
+      className="sticky top-0 z-50 w-full px-4 sm:px-6 h-14 flex items-center shadow-md"
       style={{
         backgroundColor: "var(--navbar-bg)",
         color: "var(--navbar-fg)",

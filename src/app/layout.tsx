@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import './globals.css';
+import IntroOverlay from "@/components/introOverlay";
 
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
@@ -37,7 +38,11 @@ export default function RootLayout({
           dark:bg-gray-950 dark:text-white
         `}
       >
+        <div className="animated-bg" />
+
         <ThemeProvider>
+          <IntroOverlay />
+
           <div className="min-h-screen flex flex-col">
             <Navbar />
             <div className="flex-1">{children}</div>
@@ -48,3 +53,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+

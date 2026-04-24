@@ -1,16 +1,178 @@
 @import "tailwindcss";
 
+.intro-overlay {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background: var(--navbar-bg);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   GRID SCENE CONTAINER
+   ========================= */
+
+.intro-overlay .grid-container {
+  --grid: 120px;
+
+  position: absolute;
+  inset: 0;
+
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* shared planes */
+.intro-overlay .plane {
+  position: absolute;
+  width: 300%;
+  height: 150%;
+
+  left: 50%;
+  transform-style: preserve-3d;
+}
+
+/* bottom plane */
+.intro-overlay .plane:first-child {
+  bottom: 0;
+  transform: translateX(-50%) rotateX(85deg);
+}
+
+/* top plane */
+.intro-overlay .plane:last-child {
+  top: 0;
+  transform: translateX(-50%) rotateX(-85deg);
+}
+
+/* =========================
+   GRID LINES
+   ========================= */
+
+.intro-overlay .grid {
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    repeating-linear-gradient(
+      to right,
+      var(--navbar-fg),
+      var(--navbar-fg) 7px,
+      transparent 7px,
+      transparent var(--grid)
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      var(--navbar-fg),
+      var(--navbar-fg) 7px,
+      transparent 7px,
+      transparent var(--grid)
+    );
+
+  animation: gridMove 1.6s linear infinite;
+  transform: translateZ(0);
+}
+
+/* =========================
+   CENTER HORIZONTAL FADE (FIX)
+   THIS REMOVES THE MIDDLE STRIP GLITCH
+   ========================= */
+
+.intro-overlay .grid-container::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  background: linear-gradient(
+    to bottom,
+    var(--navbar-bg) 0%,
+    transparent 25%,
+    transparent 40%,
+    var(--navbar-bg) 100%
+  );
+}
+
+/* =========================
+   GLOW
+   ========================= */
+
+.intro-overlay .glow {
+  position: absolute;
+  inset: 0;
+
+  filter: blur(18px);
+  opacity: 0.35;
+  mix-blend-mode: screen;
+}
+
+/* =========================
+   TEXT
+   ========================= */
+
+.intro-overlay .intro-content {
+  position: relative;
+  z-index: 10;
+
+  color: var(--navbar-fg);
+  font-family: "Share Tech Mono", monospace;
+  text-align: center;
+
+  filter: drop-shadow(0 0 6px var(--navbar-fg));
+}
+
+/* =========================
+   ANIMATION
+   ========================= */
+
+@keyframes gridMove {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(120px);
+  }
+}
+
+/* =========================
+   CURSOR
+   ========================= */
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  height: 1.2em;
+  margin-left: 6px;
+  background: currentColor;
+  vertical-align: bottom;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
 /* Define base colors and fonts for the LIGHT theme */
 :root {
   --background: #e3f2ff; /* Navy Blue background */
   --foreground: #5C7E8F; /* Light periwinkle text color */
   --primary: #82a1b1;    /* Tailwind blue-500 used for links/buttons */
-  --secondary: #ee6c4d;  /* Tailwind indigo-500 used for hover accents */
+  button:hover {
+  background-color: var(--secondary);
+  color: #ffffff;
+  }  /* Tailwind indigo-500 used for hover accents */
 
   /* Linked Navbar + Box variables (edit these to customize colors) */
   --navbar-bg: #D4DDE2;     /* gray-900 */
   --navbar-fg: #5C7E8F;
-  --navbar-hover: #ee6c4d;
+  a:hover {
+  color: var(--secondary);
+  }
 
   --box-bg: #D4DDE2;        /* gray-900 */
   --box-fg: #5C7E8F;
@@ -27,11 +189,16 @@ html.dark {
   --background: #3d5a80; /* Darker navy for dark mode */
   --foreground: #98c1d9; /* Softer light gray text */
   --primary: #e0fbfc;
-  --secondary: #ee6c4d;
+  button:hover {
+  background-color: var(--secondary);
+  color: #ffffff;
+  }  
 
   --navbar-bg: #293241;
   --navbar-fg: #98c1d9;
-  --navbar-hover: #ee6c4d;
+  a:hover {
+  color: var(--secondary);
+  }
 
   --box-bg: #293241;
   --box-fg: #98c1d9;
@@ -165,4 +332,76 @@ button.theme-toggle:active {
 .marquee::after {
   right: 0;
   background: linear-gradient(to left, var(--background), transparent);
+}
+
+/* Animated background */
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+
+  background: linear-gradient(
+    -45deg,
+    #e3f2ff,
+    #b4d1ff,
+    #82a1b1,
+    #92ccff,
+    #cfe8ff,
+    #e3f2ff
+  );
+
+  background-size: 400% 400%;
+  animation: gradientShift 8s ease infinite;
+}
+
+/* Dark mode override */
+html.dark .animated-bg {
+  background: linear-gradient(
+    -45deg,
+    #0f172a,
+    #1e293b,
+    #334155,
+    #1e40af,
+    #020617
+  );
+}
+
+/* Moving glow layer for depth */
+.animated-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background:
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.25), transparent 40%),
+    radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.15), transparent 50%);
+
+  animation: floatGlow 10s ease-in-out infinite;
+}
+
+/* Gradient motion */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 150% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Glow movement */
+@keyframes floatGlow {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(30px, -20px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
 }
